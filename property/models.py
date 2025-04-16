@@ -53,6 +53,11 @@ class Flat(models.Model):
         null=True,
         db_index=True)
 
+    liked_by = models.ManyToManyField(
+        User,
+        verbose_name='Кто лайкнул',
+        related_name="liked_posts",
+        blank=True)
 
 class Complaint(models.Model):
     user = models.ForeignKey(
