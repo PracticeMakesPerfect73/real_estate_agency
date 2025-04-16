@@ -68,6 +68,9 @@ class Flat(models.Model):
         verbose_name='Кто лайкнул',
         related_name="liked_posts",
         blank=True)
+    
+    def __str__(self):
+        return f'{self.town}, {self.address} ({self.price}р.)'
 
 class Complaint(models.Model):
     user = models.ForeignKey(
@@ -103,6 +106,4 @@ class Owner(models.Model):
         related_name='flat_owners',
         blank=True)
 
-def __str__(self):
-    return f'{self.town}, {self.address} ({self.price}р.)'
 
