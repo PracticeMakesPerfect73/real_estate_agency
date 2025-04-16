@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Flat
+from .models import Flat, Complaint
 
 class FlatAdmin(admin.ModelAdmin):
     list_display = (
@@ -12,5 +12,11 @@ class FlatAdmin(admin.ModelAdmin):
     readonly_fields = ["created_at"]
     pass
 
+class ComplaintAdmin(admin.ModelAdmin):
+    raw_id_fields = ('flat', 'user')
+    list_display = (
+        'flat', 'user', 'complaint_text',
+        )
 
 admin.site.register(Flat, FlatAdmin)
+admin.site.register(Complaint, ComplaintAdmin)
