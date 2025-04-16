@@ -13,6 +13,7 @@ class Flat(models.Model):
         'Нормализованный номер владельца',
         region='RU',
         blank=True,
+        null=True,
         help_text='Нормализованный номер владельца',
         db_index=True)
     created_at = models.DateTimeField(
@@ -84,6 +85,24 @@ class Complaint(models.Model):
 
     complaint_text = models.TextField('Текст жалобы', blank=True)
 
+class Owner(models.Model):
+    owner = models.CharField('ФИО владельца', max_length=200)
+    owners_phonenumber = models.CharField(
+        'Номер владельца', max_length=20,
+        blank=True, null=True)
+    owner_pure_phone = PhoneNumberField(
+        'Нормализованный номер владельца',
+        region='RU',
+        blank=True,
+        null=True,
+        help_text='Нормализованный номер владельца',
+        db_index=True)
+    flat = models.ManyToManyField(
+        Flat,
+        verbose_name='Квартиры в собственности',
+        related_name='flat_owners',
+        blank=True)
 
-    def __str__(self):
-        return f'{self.town}, {self.address} ({self.price}р.)'
+def __str__(self):
+    return f'{self.town}, {self.address} ({self.price}р.)'
+
