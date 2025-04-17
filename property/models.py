@@ -50,14 +50,16 @@ class Flat(models.Model):
         blank=True,
         db_index=True)
 
-    has_balcony = models.BooleanField('Наличие балкона', db_index=True, null=True, blank=True)
+    has_balcony = models.BooleanField(
+        'Наличие балкона', db_index=True,
+        null=True, blank=True)
     active = models.BooleanField('Активно-ли объявление', db_index=True)
     construction_year = models.IntegerField(
         'Год постройки здания',
         null=True,
         blank=True,
         db_index=True)
-    
+
     new_building = models.BooleanField(
         'Новостройка',
         null=True,
@@ -68,9 +70,10 @@ class Flat(models.Model):
         verbose_name='Кто лайкнул',
         related_name="liked_posts",
         blank=True)
-    
+
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
+
 
 class Complaint(models.Model):
     user = models.ForeignKey(
@@ -79,7 +82,7 @@ class Complaint(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         related_name='complaints')
-    
+
     flat = models.ForeignKey(
         'Flat',
         verbose_name='Квартира, на которую пожаловались',
@@ -90,6 +93,7 @@ class Complaint(models.Model):
 
     def __str__(self):
         return f'{self.user.username} на {self.flat.town}, {self.flat.address}'
+
 
 class Owner(models.Model):
     owner = models.CharField('ФИО владельца', max_length=200)
@@ -108,8 +112,6 @@ class Owner(models.Model):
         verbose_name='Квартиры в собственности',
         related_name='flat_owners',
         blank=True)
-    
+
     def __str__(self):
         return f'{self.owner}'
-
-
