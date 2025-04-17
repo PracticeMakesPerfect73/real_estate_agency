@@ -20,6 +20,7 @@ def link_owners_to_flats(apps, schema_editor):
         if owner:
             owner.flat.add(flat)
 
+
 class Migration(migrations.Migration):
 
     dependencies = [

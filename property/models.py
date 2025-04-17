@@ -88,6 +88,9 @@ class Complaint(models.Model):
 
     complaint_text = models.TextField('Текст жалобы', blank=True)
 
+    def __str__(self):
+        return f'{self.user.username} на {self.flat.town}, {self.flat.address}'
+
 class Owner(models.Model):
     owner = models.CharField('ФИО владельца', max_length=200)
     owners_phonenumber = models.CharField(
@@ -105,5 +108,8 @@ class Owner(models.Model):
         verbose_name='Квартиры в собственности',
         related_name='flat_owners',
         blank=True)
+    
+    def __str__(self):
+        return f'{self.owner}'
 
 
