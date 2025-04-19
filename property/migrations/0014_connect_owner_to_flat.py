@@ -8,7 +8,7 @@ def connect_owner_to_flat(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     Owner = apps.get_model('property', 'Owner')
 
-    for flat in Flat.objects.all():
+    for flat in Flat.objects.iterator():
         try:
             Owner.objects.get_or_create(
                 owner=flat.owner,
